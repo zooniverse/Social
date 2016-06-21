@@ -2,8 +2,10 @@ require 'rspec/its'
 require 'webmock/rspec'
 require 'rack/test'
 
-require File.expand_path '../../lib/server', __FILE__
+$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 Dir[File.expand_path('../support/**/*.rb', __FILE__)].each { |f| require f }
+
+require 'zooniverse_social'
 
 ENV['RACK_ENV'] = 'test'
 ENV['FACEBOOK_TOKEN'] = 'facebook_token'

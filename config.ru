@@ -1,2 +1,2 @@
-require_relative 'lib/server'
-run Server
+require 'zooniverse_social/server'
+run ZooniverseSocial::Server

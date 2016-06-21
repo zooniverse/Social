@@ -1,7 +1,8 @@
 module ApiHelper
   include Rack::Test::Methods
+
   def app
-    Server
+    ZooniverseSocial::Server
   end
 
   def json_response
