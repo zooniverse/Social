@@ -17,15 +17,25 @@ module ZooniverseSocial
     end
 
     def _update(updater)
-      response = updater.update number: 3, fields: 'ID,URL,title,date'
+      response = updater.update number: 3, fields: 'ID,URL,title,excerpt,date'
       response.fetch('posts', []).collect do |post|
         {
           id: post['ID'],
           title: post['title'],
+          excerpt: clean_excerpt(post['excerpt']),
           created_at: post['date'],
           link: post['URL']
         }
       end
+    end
+
+    def clean_excerpt(text)
+      (text || '')
+        .gsub('&nbsp;', '')
+        .gsub('[&hellip;]', '')
+        .gsub('<p>', '')
+        .gsub('</p>', '')
+        .strip
     end
   end
 end

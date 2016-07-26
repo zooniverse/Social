@@ -36,6 +36,7 @@ module ZooniverseSocial
           'posts' => [{
             'ID' => 123,
             'title' => 'title1',
+            'excerpt' => '<p>excerpt1[&hellip;]</p>',
             'date' => '1',
             'URL' => 'url1'
           }]
@@ -47,6 +48,7 @@ module ZooniverseSocial
           'posts' => [{
             'ID' => 456,
             'title' => 'title2',
+            'excerpt' => '<p>excerpt2[&hellip;]</p>',
             'date' => '2',
             'URL' => 'url2'
           }]
@@ -57,7 +59,7 @@ module ZooniverseSocial
         [blog_updater, daily_updater].each do |updater|
           expect(updater).to receive(:update)
             .at_least(:once)
-            .with(number: 3, fields: 'ID,URL,title,date')
+            .with(number: 3, fields: 'ID,URL,title,excerpt,date')
         end
         subject.update
       end
@@ -67,11 +69,13 @@ module ZooniverseSocial
         expect(subject.data).to eql [{
           id: 456,
           title: 'title2',
+          excerpt: 'excerpt2',
           created_at: '2',
           link: 'url2'
         }, {
           id: 123,
           title: 'title1',
+          excerpt: 'excerpt1',
           created_at: '1',
           link: 'url1'
         }]
