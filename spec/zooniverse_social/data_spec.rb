@@ -43,7 +43,8 @@ module ZooniverseSocial
     end
 
     describe '.start' do
-      let(:timer){ double execute: true }
+      let(:task){ double add_observer: true }
+      let(:timer){ double execute: task }
 
       before :each do
         allow(Concurrent::TimerTask).to receive(:new).and_return timer
@@ -52,12 +53,19 @@ module ZooniverseSocial
       it 'should create a timer task' do
         Data.start
         expect(Concurrent::TimerTask).to have_received(:new).with({
-          execution_interval: 600, run_now: true
+          execution_interval: 600,
+          timeout_interval: 20,
+          run_now: true
         })
       end
 
       it 'should execute the task' do
         expect(timer).to receive :execute
+        Data.start
+      end
+
+      it 'should observe the task' do
+        expect(TaskObserver).to receive(:new).with task, Method
         Data.start
       end
     end

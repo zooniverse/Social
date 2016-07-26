@@ -3,6 +3,7 @@ require 'concurrent'
 require 'zooniverse_social/posts'
 require 'zooniverse_social/statuses'
 require 'zooniverse_social/tweets'
+require 'zooniverse_social/task_observer'
 
 module ZooniverseSocial
   class Data
@@ -35,7 +36,8 @@ module ZooniverseSocial
     end
 
     def self.start
-      Concurrent::TimerTask.new(execution_interval: 600, run_now: true){ update }.execute
+      task = Concurrent::TimerTask.new(execution_interval: 600, timeout_interval: 20, run_now: true){ update }.execute
+      TaskObserver.new task, method(:start)
     end
   end
 end
