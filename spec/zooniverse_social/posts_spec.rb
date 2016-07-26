@@ -36,7 +36,7 @@ module ZooniverseSocial
           'posts' => [{
             'ID' => 123,
             'title' => 'title1',
-            'excerpt' => '<p>excerpt1[&hellip;]</p>',
+            'excerpt' => '<p>excerpt1[&hellip;]&#33;</p>',
             'date' => '1',
             'URL' => 'url1'
           }]
@@ -48,7 +48,7 @@ module ZooniverseSocial
           'posts' => [{
             'ID' => 456,
             'title' => 'title2',
-            'excerpt' => '<p>excerpt2[&hellip;]</p>',
+            'excerpt' => '<p>excerpt2[&hellip;]&#33;</p>',
             'date' => '2',
             'URL' => 'url2'
           }]
@@ -69,13 +69,13 @@ module ZooniverseSocial
         expect(subject.data).to eql [{
           id: 456,
           title: 'title2',
-          excerpt: 'excerpt2',
+          excerpt: 'excerpt2!',
           created_at: '2',
           link: 'url2'
         }, {
           id: 123,
           title: 'title1',
-          excerpt: 'excerpt1',
+          excerpt: 'excerpt1!',
           created_at: '1',
           link: 'url1'
         }]

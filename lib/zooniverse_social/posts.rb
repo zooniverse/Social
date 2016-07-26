@@ -1,3 +1,4 @@
+require 'cgi'
 require 'zooniverse_social/updater'
 
 module ZooniverseSocial
@@ -30,7 +31,7 @@ module ZooniverseSocial
     end
 
     def clean_excerpt(text)
-      (text || '')
+      CGI.unescapeHTML (text || '')
         .gsub('&nbsp;', '')
         .gsub('[&hellip;]', '')
         .gsub('<p>', '')
