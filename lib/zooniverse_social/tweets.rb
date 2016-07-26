@@ -14,7 +14,12 @@ module ZooniverseSocial
     end
 
     def update
-      @data = @twitter.search('from:the_zooniverse', result_type: 'recent').take(3).collect &:to_h
+      @data = @twitter.search('from:the_zooniverse', result_type: 'recent').take(3).collect do |tweet|
+        tweet.to_h.tap do |hash|
+          appended = hash.dig :entities, :urls, 0, :url
+          hash[:text].sub!(/\s?#{ appended }/, '') if appended
+        end
+      end
     end
   end
 end
