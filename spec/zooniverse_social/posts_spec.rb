@@ -35,7 +35,7 @@ module ZooniverseSocial
         {
           'posts' => [{
             'ID' => 123,
-            'title' => '&#8220;title1&#8221;&#8217;',
+            'title' => '<p>title1[&hellip;]&#33;</p>',
             'excerpt' => '<p>excerpt1[&hellip;]&#33;</p>',
             'date' => '1',
             'URL' => 'url1'
@@ -47,7 +47,7 @@ module ZooniverseSocial
         {
           'posts' => [{
             'ID' => 456,
-            'title' => 'title2',
+            'title' => '<p>title2[&hellip;]&#33;</p>',
             'excerpt' => '<p>excerpt2[&hellip;]&#33;</p>',
             'date' => '2',
             'URL' => 'url2'

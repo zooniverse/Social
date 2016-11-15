@@ -32,13 +32,8 @@ module ZooniverseSocial
 
     def clean_excerpt(text)
       CGI.unescapeHTML (text || '')
-        .gsub('&#8217;', '\'')
-        .gsub('&#8220;', '"')
-        .gsub('&#8221;', '"')
-        .gsub('&#38;', '&')
-        .gsub('&nbsp;', ' ')
-        .gsub('[&hellip;]', '...')
-        .gsub('&#8230;', '...')
+        .gsub('&nbsp;', '')
+        .gsub('[&hellip;]', '')
         .gsub('<p>', '')
         .gsub('</p>', '')
         .strip
