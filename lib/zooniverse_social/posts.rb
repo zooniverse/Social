@@ -22,7 +22,7 @@ module ZooniverseSocial
       response.fetch('posts', []).collect do |post|
         {
           id: post['ID'],
-          title: post['title'],
+          title: clean_excerpt(post['title']),
           excerpt: clean_excerpt(post['excerpt']),
           created_at: post['date'],
           link: post['URL']
@@ -32,8 +32,13 @@ module ZooniverseSocial
 
     def clean_excerpt(text)
       CGI.unescapeHTML (text || '')
-        .gsub('&nbsp;', '')
-        .gsub('[&hellip;]', '')
+        .gsub('&#8217;', '\'')
+        .gsub('&#8220;', '"')
+        .gsub('&#8221;', '"')
+        .gsub('&#38;', '&')
+        .gsub('&nbsp;', ' ')
+        .gsub('[&hellip;]', '...')
+        .gsub('&#8230;', '...')
         .gsub('<p>', '')
         .gsub('</p>', '')
         .strip
