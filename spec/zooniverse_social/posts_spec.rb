@@ -29,13 +29,6 @@ module ZooniverseSocial
         expect(daily_updater).to have_received :update
       end
 
-      it 'calls the daily updater' do
-        expect(Updater).to receive(:new).with(
-            'https://public-api.wordpress.com', '/rest/v1.1/sites/57182749/posts'
-        ).and_return daily_updater
-
-        subject
-      end
     end
 
     describe '#update' do
