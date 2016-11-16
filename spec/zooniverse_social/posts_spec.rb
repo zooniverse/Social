@@ -5,7 +5,7 @@ module ZooniverseSocial
         'https://public-api.wordpress.com', '/rest/v1.1/sites/36711287/posts'
       ).and_return blog_updater
 
-      expect(Updater).to receive(:new).with(
+      allow(Updater).to receive(:new).with(
         'https://public-api.wordpress.com', '/rest/v1.1/sites/57182749/posts'
       ).and_return daily_updater
     end
@@ -28,6 +28,7 @@ module ZooniverseSocial
         expect(blog_updater).to have_received :update
         expect(daily_updater).to have_received :update
       end
+
     end
 
     describe '#update' do
@@ -35,7 +36,7 @@ module ZooniverseSocial
         {
           'posts' => [{
             'ID' => 123,
-            'title' => 'title1',
+            'title' => '<p>title1[&hellip;]</p>',
             'excerpt' => '<p>excerpt1[&hellip;]&#33;</p>',
             'date' => '1',
             'URL' => 'url1'
@@ -47,7 +48,7 @@ module ZooniverseSocial
         {
           'posts' => [{
             'ID' => 456,
-            'title' => 'title2',
+            'title' => '<p>title2[&hellip;]</p>',
             'excerpt' => '<p>excerpt2[&hellip;]&#33;</p>',
             'date' => '2',
             'URL' => 'url2'
@@ -79,6 +80,35 @@ module ZooniverseSocial
           created_at: '1',
           link: 'url1'
         }]
+      end
+
+      it 'calls the daily updater' do
+        expect(Updater).to receive(:new).with(
+            'https://public-api.wordpress.com', '/rest/v1.1/sites/57182749/posts'
+        ).and_return daily_updater
+
+        subject.update
+      end
+    end
+
+    describe 'clean_excerpt' do
+      it 'adds ampersand' do
+        expect(described_class.clean_excerpt("foo &#38; bar")).to eq("foo & bar")
+      end
+      it 'adds double quotes' do
+        expect(described_class.clean_excerpt("&#8220;foo&#8221;")).to eq("\"foo\"")
+      end
+      it 'adds signle quote' do
+        expect(described_class.clean_excerpt("foo&#8217;s")).to eq("foo's")
+      end
+      it 'removes non breaking spaces' do
+        expect(described_class.clean_excerpt("foo &nbsp; bar")).to eq("foo  bar")
+      end
+      it 'removes ellipsis' do
+        expect(described_class.clean_excerpt("foo[&hellip;]")).to eq("foo")
+      end
+      it 'removes paragraph' do
+        expect(described_class.clean_excerpt("<p>foo</p>")).to eq("foo")
       end
     end
   end
