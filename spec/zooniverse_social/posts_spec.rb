@@ -28,7 +28,6 @@ module ZooniverseSocial
         expect(blog_updater).to have_received :update
         expect(daily_updater).to have_received :update
       end
-
     end
 
     describe '#update' do
@@ -91,24 +90,29 @@ module ZooniverseSocial
       end
     end
 
-    describe 'clean_excerpt' do
+    describe '#remove_entities' do
       it 'adds ampersand' do
-        expect(described_class.clean_excerpt("foo &#38; bar")).to eq("foo & bar")
+        expect(subject.remove_entities("foo &#38; bar")).to eql("foo & bar")
       end
+
       it 'adds double quotes' do
-        expect(described_class.clean_excerpt("&#8220;foo&#8221;")).to eq("\"foo\"")
+        expect(subject.remove_entities("&#8220;foo&#8221;")).to eql("\"foo\"")
       end
+
       it 'adds signle quote' do
-        expect(described_class.clean_excerpt("foo&#8217;s")).to eq("foo's")
+        expect(subject.remove_entities("foo&#8217;s")).to eql("foo's")
       end
+
       it 'removes non breaking spaces' do
-        expect(described_class.clean_excerpt("foo &nbsp; bar")).to eq("foo  bar")
+        expect(subject.remove_entities("foo &nbsp; bar")).to eql("foo  bar")
       end
+
       it 'removes ellipsis' do
-        expect(described_class.clean_excerpt("foo[&hellip;]")).to eq("foo")
+        expect(subject.remove_entities("foo[&hellip;]")).to eql("foo")
       end
+
       it 'removes paragraph' do
-        expect(described_class.clean_excerpt("<p>foo</p>")).to eq("foo")
+        expect(subject.remove_entities("<p>foo</p>")).to eql("foo")
       end
     end
   end

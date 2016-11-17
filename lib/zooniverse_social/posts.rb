@@ -22,15 +22,15 @@ module ZooniverseSocial
       response.fetch('posts', []).collect do |post|
         {
           id: post['ID'],
-          title: self.class.clean_excerpt(post['title']),
-          excerpt: self.class.clean_excerpt(post['excerpt']),
+          title: remove_entities(post['title']),
+          excerpt: remove_entities(post['excerpt']),
           created_at: post['date'],
           link: post['URL']
         }
       end
     end
 
-    def self.clean_excerpt(text)
+    def remove_entities(text)
       CGI.unescapeHTML (text || '')
         .gsub('&#8217;', '\'')
         .gsub('&#8220;', '"')
