@@ -38,7 +38,8 @@ module ZooniverseSocial
             'title' => '<p>title1[&hellip;]</p>',
             'excerpt' => '<p>excerpt1[&hellip;]&#33;</p>',
             'date' => '1',
-            'URL' => 'url1'
+            'URL' => 'url1',
+            'featured_image' => 'https://blog.com/test.png'
           }]
         }
       end
@@ -50,7 +51,8 @@ module ZooniverseSocial
             'title' => '<p>title2[&hellip;]</p>',
             'excerpt' => '<p>excerpt2[&hellip;]&#33;</p>',
             'date' => '2',
-            'URL' => 'url2'
+            'URL' => 'url2',
+            'featured_image' => 'https://blog.com/test.png'
           }]
         }
       end
@@ -59,7 +61,7 @@ module ZooniverseSocial
         [blog_updater, daily_updater].each do |updater|
           expect(updater).to receive(:update)
             .at_least(:once)
-            .with(number: 3, fields: 'ID,URL,title,excerpt,date')
+            .with(number: 3, fields: 'ID,URL,title,excerpt,date,featured_image')
         end
         subject.update
       end
@@ -71,13 +73,15 @@ module ZooniverseSocial
           title: 'title2',
           excerpt: 'excerpt2!',
           created_at: '2',
-          link: 'url2'
+          link: 'url2',
+          image: 'https://blog.com/test.png'
         }, {
           id: 123,
           title: 'title1',
           excerpt: 'excerpt1!',
           created_at: '1',
-          link: 'url1'
+          link: 'url1',
+          image: 'https://blog.com/test.png'
         }]
       end
 
