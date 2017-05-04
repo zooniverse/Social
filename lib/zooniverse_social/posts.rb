@@ -18,14 +18,15 @@ module ZooniverseSocial
     end
 
     def _update(updater)
-      response = updater.update number: 3, fields: 'ID,URL,title,excerpt,date'
+      response = updater.update number: 3, fields: 'ID,URL,title,excerpt,date,featured_image'
       response.fetch('posts', []).collect do |post|
         {
           id: post['ID'],
           title: remove_entities(post['title']),
           excerpt: remove_entities(post['excerpt']),
           created_at: post['date'],
-          link: post['URL']
+          link: post['URL'],
+          image: post['featured_image']
         }
       end
     end
