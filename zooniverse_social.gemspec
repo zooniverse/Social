@@ -19,7 +19,7 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'puma', '~> 3.2'
+  spec.add_runtime_dependency 'puma'
   spec.add_runtime_dependency 'sinatra', '~> 1.4'
   spec.add_runtime_dependency 'twitter', '~> 5.16'
   spec.add_runtime_dependency 'faraday', '~> 0.9'
