@@ -22,7 +22,15 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Install dependencies
+`bundle install`
+
+### Test the app
+`bundle exec rspec`
+
+### Publishing to [RubyGems](https://rubygems.org/)
+`rake build` - to create the new gem version locally  
+`rake release` - to tag the gem and release it to RubyGems
 
 ## License
 
