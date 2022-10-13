@@ -1,0 +1,25 @@
+name: Zooni CI
+on:
+  pull_request:
+  push: { branches: master }
+jobs:
+env:
+  DATABASE_URL_TEST: postgresql://postgres:postgres@localhost/${{ inputs.db_name }}
+  RAILS_ENV: test
+
+jobs:
+  tests:
+    name: Run Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3.1.0
+
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '2.6' # Not needed with a .ruby-version file
+          bundler-cache: true # runs 'bundle install' and caches installed gems automatically
+
+      - name: Run tests
+        run: bundle exec rspec
