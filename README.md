@@ -22,6 +22,11 @@ Or install it yourself as:
 
 ## Usage
 
+### Boot the application
+Run the app via the rackup cmd, <https://github.com/sinatra/sinatra#serving-a-modular-application>
+
+`bundle exec rackup -p 4567`
+
 ### Install dependencies
 `bundle install`
 
@@ -29,11 +34,11 @@ Or install it yourself as:
 `bundle exec rspec`
 
 ### Publishing to [RubyGems](https://rubygems.org/)
-`rake build` - to create the new gem version locally  
+`rake build` - to create the new gem version locally
 `rake release` - to tag the gem and release it to RubyGems
 
 ## License
 
-Copyright 2016 by the Zooniverse
+Copyright 2022 by the Zooniverse
 
 The gem is available as open source under the terms of the [Apache License v2](https://opensource.org/licenses/Apache-2.0).
