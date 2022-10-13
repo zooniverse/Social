@@ -20,7 +20,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_runtime_dependency 'puma'
-  spec.add_runtime_dependency 'sinatra', '~> 1.4'
+  spec.add_runtime_dependency 'sinatra'
   spec.add_runtime_dependency 'twitter', '~> 5.16'
   spec.add_runtime_dependency 'faraday', '~> 0.9'
   spec.add_runtime_dependency 'concurrent-ruby', '~> 1.0'
