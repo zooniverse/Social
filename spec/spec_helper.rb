@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rspec/its'
 require 'webmock/rspec'
 require 'rack/test'
@@ -9,8 +11,6 @@ require 'zooniverse_social'
 
 ENV['RACK_ENV'] = 'test'
 ENV['FACEBOOK_TOKEN'] = 'facebook_token'
-ENV['TWITTER_KEY'] = 'twitter_key'
-ENV['TWITTER_SECRET'] = 'twitter_secret'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|

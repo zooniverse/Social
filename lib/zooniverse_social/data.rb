@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+
 require 'concurrent'
 
 require 'zooniverse_social/posts'
 require 'zooniverse_social/statuses'
-require 'zooniverse_social/tweets'
 require 'zooniverse_social/task_observer'
 
 module ZooniverseSocial
@@ -11,22 +12,17 @@ module ZooniverseSocial
       @posts ||= Posts.new
     end
 
-    def self.tweets
-      @tweets ||= Tweets.new
-    end
-
     def self.statuses
       @statuses ||= Statuses.new
     end
 
     def self.sources
-      [posts, tweets, statuses]
+      [posts, statuses]
     end
 
     def self.current
       {
         posts: posts.data,
-        tweets: tweets.data,
         statuses: statuses.data
       }
     end
