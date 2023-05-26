@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
 
   spec.add_runtime_dependency 'concurrent-ruby', '~> 1.0'
   spec.add_runtime_dependency 'concurrent-ruby-ext', '~> 1.0'
-  spec.add_runtime_dependency 'faraday', '~> 2.7'
+  spec.add_runtime_dependency 'faraday', '~> 0.9'
   spec.add_runtime_dependency 'puma'
   spec.add_runtime_dependency 'sinatra', '>= 2.2'
 
